@@ -1,6 +1,6 @@
 from numpy import random
-from Calculations import calc
-import Math
+import Calculations as calc
+import wMath
 
 #  * @param lot {Object}
 #  * @param sick {int} minimum amount of people sick to be considered an outbreak

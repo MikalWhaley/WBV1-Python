@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import random
-import Math as wMath
+import wMath as wMath
 
 
 def gaussianRand():
@@ -54,13 +54,15 @@ probability_of_large_cluster = .005
 
 class Lot:
 
-    lot_size = 100000
-    total_cfu = 0
-    clusters = []
-    ID = 0
+    
 
     def __init__(self, lots): 
         self.lot = lots
+        self.lot_size = 100000
+        self.total_cfu = 0
+        self.clusters = []
+        self.ID = 0
+
 
 
     def cycle(self):
