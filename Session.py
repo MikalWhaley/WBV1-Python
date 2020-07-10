@@ -57,7 +57,20 @@ class Session:
         print(self.obj)
     
     def between(self, n, upperLimit, lowerLimit):
-        
+        if(n > upperLimit):
+          return upperLimit
+        elif (n < lowerLimit):
+          return lowerLimit
+        else:
+          return n
+    
+    def profile(self):
+        prof_obj = {
+            "GAP_Selection": wConst.GAP[self.selections.GAP_Selection]["Price"],
+            "Process_Selection": Process[this.selections.Process_Selection].Price,
+            "rawTests": this.selections.rawTests * Prices.PerRawTest,
+            "finishedTests": this.selections.finishedTests * Prices.PerFinishedTest,
+        }
 
 
     
