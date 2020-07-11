@@ -96,15 +96,25 @@ class Session:
         
         if( id == "GAP"):
 
-            keys = Object.keys(GAP)
+            keys = wConst.GAP.keys()
             
-            if(keys.includes(val.toUpperCase())):
+            if(val.upper() in keys):
                 self.selections["GAP_Selection"] = val
                 return True
                 
 
-        
-    
+        if (id == "PROCESS"):
+
+            keys = wConst.GAP.keys()
+
+            if(val.upper() in keys):
+                self.selections["Process_Selection"] = val
+                return True
+
+        if (id == "RAWTESTS"):
+
+            if(val.isnumeric()):
+                
 
 
 
