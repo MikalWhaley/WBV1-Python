@@ -1,7 +1,8 @@
 import wMath
 import random
 import numpy as np
-import math as wMath
+import math
+import wMath as wMath
 import Lot as wlot
 import Calculations as wCalc
 import Constants as wConst
@@ -65,14 +66,44 @@ class Session:
           return n
     
     def profile(self):
+
         prof_obj = {
-            "GAP_Selection": wConst.GAP[self.selections.GAP_Selection]["Price"],
-            "Process_Selection": Process[this.selections.Process_Selection].Price,
-            "rawTests": this.selections.rawTests * Prices.PerRawTest,
-            "finishedTests": this.selections.finishedTests * Prices.PerFinishedTest,
+            "GAP_Selection": wConst.GAP[self.selections["GAP_Selection"]]["Price"],
+            "Process_Selection": wConst.PROCESS[self.selections["Process_Selection"]]["price"],
+            "rawTests": self.selections["rawTests"] * wConst.PRICES["PerRawTest"],
+            "finishedTests": self.selections["finishedTests"] * wConst.PRICES["PerFinishedTest"],
+            "Total": wConst.GAP[self.selections["GAP_Selection"]]["Price"] +
+            wConst.PROCESS[self.selections["Process_Selection"]]["Price"] +
+            self.selections["rawTests"] * wConst.PRICES["PerRawTest"] +
+            self.selections["finishedTests"] * wConst.PRICES["PerFinishedTest"],
+            "Limit": self.between(math.floor(self.balance // ((wConst.GAP[self.selections["GAP_Selection"]]["Price"]) +
+            wConst.PROCESS[self.selections["Process_Selection"]]["Price"] +
+            self.selections["rawTests"] * wConst.PRICES["PerRawTest"] +
+            self.selections["finishedTests"] * wConst.PRICES["PerFinishedTest"])), 1000, 1)
         }
+        return(prof_obj)
 
+    def cost(self):
+        return (wConst.GAP[self.selections["GAP_Selection"]]["PRICES"] +
+        wConst.PROCESS[self.selections["Process_Selection"]]["Price"] +
+        self.selections["rawTests"] * wConst.PRICES["PerRawTest"] +
+        self.selections["finishedTests"] * wConst.PRICES["PerFinishedTest"])
 
+    def select(self, id, val):
+
+        id = id.upper()
+
+        
+        if( id == "GAP"):
+
+            keys = Object.keys(GAP)
+            
+            if(keys.includes(val.toUpperCase())):
+                self.selections["GAP_Selection"] = val
+                return True
+                
+
+        
     
 
 
