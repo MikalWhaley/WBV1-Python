@@ -26,7 +26,7 @@ def list_splice(target, start, delete_count=None, *items):
 
         # store removed range in a separate list and replace with *items
         total = start + delete_count
-        removed = target[start:total] # no longer needed so okay
+        #removed = target[start:total] # no longer needed so okay
         target[start:total] = items
 
         return target
