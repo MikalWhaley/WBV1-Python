@@ -54,16 +54,18 @@ probability_of_large_cluster = .005
 
 class Lot:
 
-    
 
-    def __init__(self, lots): 
-        self.lot = lots
+
+    def __init__(self):
         self.lot_size = 100000
         self.total_cfu = 0
         self.clusters = []
         self.ID = 0
 
+        
 
+    def initialize(self):
+        self.cycle() 
 
     def cycle(self):
         self.compound_background_sources()
