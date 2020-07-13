@@ -23,6 +23,7 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             data = s.cycle(cycles)
 
             result = json.loads(data)
+            result["key"] = key
             matrix.append(result)
 
     if(variable == "Process"):
@@ -31,6 +32,7 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             data = s.cycle(cycles)
 
             result = json.loads(data)
+            result["key"] = key
             matrix.append(result)
     
     if(variable == "rawTests"):
@@ -40,7 +42,7 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             data = s.cycle(cycles)
 
             result = json.loads(data)
-            result.key = i
+            result["key"] = i
 
             matrix.append(result)
     
@@ -51,7 +53,7 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             data = s.cycle(cycles)
 
             result = json.loads(data)
-            result.key = i
+            result["key"] = i
 
             matrix.append(result)
 
