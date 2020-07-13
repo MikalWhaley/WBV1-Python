@@ -158,7 +158,7 @@ class Session:
 
 
     def cycle(self, amount):
-        beforeBalance = self.balance
+        #beforeBalance = self.balance
 
         #STEP 1 Check For Substantial Balance
         cost = self.cost
