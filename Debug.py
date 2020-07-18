@@ -56,5 +56,5 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             result["key"] = i
 
             matrix.append(result)
-
+    print(matrix)
     return matrix
