@@ -5,10 +5,10 @@ import json
 
 def simulate(GAP, Process, rawTests, finishedTests, variable):
     s = wSess.Session(54321)
-    s.selections.GAP_Selection = GAP
-    s.selections.Process_Selection = Process
-    s.selections.rawTests = rawTests
-    s.selections.finishedTests = finishedTests
+    s.selections["GAP_Selection"] = GAP
+    s.selections["Process_Selection"] = Process
+    s.selections["rawTests"] = rawTests
+    s.selections["finishedTests"] = finishedTests
 
     s.balance = float("inf")
 
@@ -22,18 +22,18 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             s.selections["GAP_Selection"] = key
             data = s.cycle(cycles)
 
-            result = json.loads(data)
-            result["key"] = key
-            matrix.append(result)
+            #result = json.loads(data)
+            data["key"] = key
+            matrix.append(data)
 
     if(variable == "Process"):
         for key in wConst.PROCESS:
             s.selections["Process_Selection "] = key
             data = s.cycle(cycles)
 
-            result = json.loads(data)
-            result["key"] = key
-            matrix.append(result)
+            #result = json.loads(data)
+            data["key"] = key
+            matrix.append(data)
     
     if(variable == "rawTests"):
         for i in range(0, 51):
@@ -41,10 +41,9 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             s.selections["rawTests"] = i
             data = s.cycle(cycles)
 
-            result = json.loads(data)
-            result["key"] = i
-
-            matrix.append(result)
+            #result = json.loads(data)
+            data["key"] = i
+            matrix.append(data)
     
     if(variable == "finishedTests"):
         for i in range(0, 51):
@@ -52,9 +51,9 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             s.selections["finishedTests"] = i
             data = s.cycle(cycles)
 
-            result = json.loads(data)
-            result["key"] = i
+            #result = json.loads(data)
+            data["key"] = i
 
-            matrix.append(result)
+            matrix.append(data)
     print(matrix)
     return matrix

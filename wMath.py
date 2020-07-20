@@ -32,4 +32,5 @@ def random_distribution(mean, std):
 
 
 def compound_probability(probability, factor):
-    return 1 - pow(1 - probability, factor)
+
+    return (1 - pow(1 - probability, float(factor)))

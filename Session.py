@@ -111,10 +111,10 @@ class Session:
         return(prof_obj)
 
     def cost(self):
-        return (wConst.GAP[self.selections["GAP_Selection"]]["PRICES"] +
-        wConst.PROCESS[self.selections["Process_Selection"]]["Price"] +
-        self.selections["rawTests"] * wConst.PRICES["PerRawTest"] +
-        self.selections["finishedTests"] * wConst.PRICES["PerFinishedTest"])
+        return (float(wConst.GAP[self.selections["GAP_Selection"]]["Price"]) +
+        float(wConst.PROCESS[self.selections["Process_Selection"]]["Price"]) +
+        float(self.selections["rawTests"]) * float(wConst.PRICES["PerRawTest"]) +
+        float(self.selections["finishedTests"]) * float(wConst.PRICES["PerFinishedTest"]))
 
     def select(self, id, val):
 
@@ -161,8 +161,8 @@ class Session:
         #beforeBalance = self.balance
 
         #STEP 1 Check For Substantial Balance
-        cost = self.cost
-        price = cost * amount
+        costNum = self.cost()
+        price = costNum * amount
 
         if(price > self.balance):
             return '{"Error": "Total Price of Cycle(' + price + ') exceeds current balance(' + self.balance + ')"}'
@@ -177,7 +177,7 @@ class Session:
             lots.append(lot)
             lot.ID = i
 
-            m = wMath.random_distribution(wConst.GAP[Gap]["Multiplier"], wConst.GAP[Gap["STD"]])
+            m = wMath.random_distribution(Gap["Multiplier"], Gap["STD"])
 
             lot.total_cfu *= .25
             lot.total_cfu *= m
@@ -242,20 +242,20 @@ class Session:
             outbreak_cost += 10000 * self.statistics["outbreak_multiplier"]
             self.statistics["outbreak_multiplier"] *= 2
         
-        self.balance += (wConst.PRICES["SuccessfulLot"] * lots.length) - outbreak_cost - price
+        self.balance += (wConst.PRICES["SuccessfulLot"] * len(lots)) - outbreak_cost - price
 
-        self.statistics["cycles"] += int(amount)
+        self.statistics["cycles"] += float(amount)
         self.statistics["outbreaks"] += outbreaks
 
 
         results = {
-            "lots": int(amount),
-            "lotsPassed": lots.length,
+            "lots": float(amount),
+            "lotsPassed": len(lots),
             "rawCaught": rawCaught,
             "finishedCaught": finishedCaught,
             "outbreaks": outbreaks,
             "gain": (wConst.PRICES["SuccessfulLot"] * len(lots)) - outbreak_cost - price,
-            "costPerLot": cost
+            "costPerLot": costNum
         }
 
         self.statistics["steps"] +=1 
