@@ -103,7 +103,7 @@ class Session:
             wConst.PROCESS[self.selections["Process_Selection"]]["Price"] +
             self.selections["rawTests"] * wConst.PRICES["PerRawTest"] +
             self.selections["finishedTests"] * wConst.PRICES["PerFinishedTest"],
-            "Limit": self.between(math.floor(self.balance // ((wConst.GAP[self.selections["GAP_Selection"]]["Price"]) +
+            "Limit": self.between(math.floor(self.balance / ((wConst.GAP[self.selections["GAP_Selection"]]["Price"]) +
             wConst.PROCESS[self.selections["Process_Selection"]]["Price"] +
             self.selections["rawTests"] * wConst.PRICES["PerRawTest"] +
             self.selections["finishedTests"] * wConst.PRICES["PerFinishedTest"])), 1000, 1)
@@ -190,7 +190,7 @@ class Session:
 
         for i in range(0, len(lots)):
             lot = lots[i]
-            rawTestingCalculation = 1 - wMath.poisson(0, (lot.getCFUPerPound() * 150) // 454, False)
+            rawTestingCalculation = 1 - wMath.poisson(0, (lot.getCFUPerPound() * 150) / 454, False)
 
             chanceOfPositive = wMath.compound_probability(rawTestingCalculation, self.selections["rawTests"])
             positive = wMath.random_test(chanceOfPositive)
@@ -207,10 +207,10 @@ class Session:
         for i in range(0, len(lots)):
             lot = lots[i]
             process = wConst.PROCESS[self.selections["Process_Selection"]]["Reduction"]
-            reduced = lot.total_cfu * (1 // math.pow(10, process))
-            CFUsPerPound = reduced // lot.lot_size
+            reduced = lot.total_cfu * (1 / math.pow(10, process))
+            CFUsPerPound = reduced / lot.lot_size
 
-            testingCalculation = 1 - wMath.poisson(0, (CFUsPerPound * 150)//454, False)
+            testingCalculation = 1 - wMath.poisson(0, (CFUsPerPound * 150)/454, False)
             chanceOfPositive = wMath.compound_probability(testingCalculation, self.selections["finishedTests"])
             positive = wMath.random_test(chanceOfPositive)
 

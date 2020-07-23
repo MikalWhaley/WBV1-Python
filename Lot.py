@@ -23,7 +23,7 @@ def gaussianRand():
             if(w >= 1.0):
                 break
 
-        w = math.sqrt((-2.0 * math.log10(w)) // w)
+        w = math.sqrt((-2.0 * math.log10(w)) / w)
         
         value0 = x1 * w
         value1 = x2 * w
@@ -116,13 +116,13 @@ class Lot:
             self.total_cfu += 50000
         
     def info(self, log):
-        info = "Lot " + self.ID + " | Total CFUs: " + self.total_cfu + "; CFUs per #: " + (self.total_cfu // self.lot_size) + "; Total Clusters: " + len(self.clusters)
+        info = "Lot " + self.ID + " | Total CFUs: " + self.total_cfu + "; CFUs per #: " + (self.total_cfu / self.lot_size) + "; Total Clusters: " + len(self.clusters)
         if (log):
             print(log(info))
         return info
 
     def getCFUPerPound(self):
-        return(self.total_cfu // self.lot_size) 
+        return(self.total_cfu / self.lot_size) 
 
 
 class Cluster:

@@ -11,12 +11,12 @@ def factorial(x):
 def poisson(x, lambd, cumulative):
     
     if(cumulative):
-        sumVar = 0
+        sumVar = float(0)
         for i in range(0, x + 1):
-            sumVar += ((math.exp(-lambd) * pow(lambd, i)) // factorial(i))# pylint: disable=no-member
+            sumVar += ( float((math.exp(-lambd)) * float(pow(lambd, i))) / float(factorial(i)))
         return sumVar
     else:
-        return math.exp(-lambd) * pow(lambd, x) // factorial(x)# pylint: disable=no-member
+        return (math.exp(-lambd) * pow(lambd, x) / factorial(x))
 
 
 def random_test(probability):

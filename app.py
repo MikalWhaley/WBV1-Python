@@ -1,10 +1,10 @@
 import Debug as wDebug
 
 
-gapIn = input()
-processIn = input()
-rawIn = input()
-finishedIn = input()
-variableIn = input()
+# gapIn = input()
+# processIn = input()
+# rawIn = input()
+# finishedIn = input()
+# variableIn = input()
 
-wDebug.simulate(gapIn, processIn, rawIn, finishedIn, variableIn)
+wDebug.simulate("ASW", "CSP1F", 10, 10, "GAP")
