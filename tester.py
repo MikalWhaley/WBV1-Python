@@ -12,6 +12,6 @@ import Debug as wDebug
 
 # print(wMath.poisson(1,10,True))
 
-print(wMath.random_distribution(3, 1))
+
 
 #print(math.exp(-8))

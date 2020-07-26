@@ -10,7 +10,8 @@ import wMath
 
 
 def get_possibility_of_outbreak(lot, sick, susceptible, dose, process):
-    return 1 - wMath.poisson(sick, (1 / susceptible) * (1 / dose) * (1 / pow(10, process)), True)
+    #print(str(lot), sick, susceptible, dose, process)
+    return 1 - wMath.poisson(sick, (lot.total_cfu) * (1 / susceptible) * (1 / dose) * (1 / pow(10, process)), True)
 
 
 

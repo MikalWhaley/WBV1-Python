@@ -177,6 +177,8 @@ class Session:
             lots.append(lot)
             lot.ID = i
 
+            #print(lot.total_cfu)
+
             m = wMath.random_distribution(Gap["Multiplier"], Gap["STD"])
 
             lot.total_cfu *= .25
@@ -188,24 +190,26 @@ class Session:
 
         rawCaught = 0
 
-        for i in range(0, len(lots)):
-            lot = lots[i]
+        c = 0
+        while(c < len(lots)):
+            lot = lots[c]
             rawTestingCalculation = 1 - wMath.poisson(0, (lot.getCFUPerPound() * 150) / 454, False)
-
+            
             chanceOfPositive = wMath.compound_probability(rawTestingCalculation, self.selections["rawTests"])
             positive = wMath.random_test(chanceOfPositive)
-
+            
             if (positive):
-                lots = list_splice(lots, i, 1)
+                lots = list_splice(lots, c, 1)
                 rawCaught += 1
-                i -= 1
+                c -= 1
+            c += 1
     
         # Step 4.2 Finished Testing
 
         finishedCaught = 0
-
-        for i in range(0, len(lots)):
-            lot = lots[i]
+        c = 0
+        while(c < len(lots)):
+            lot = lots[c]
             process = wConst.PROCESS[self.selections["Process_Selection"]]["Reduction"]
             reduced = lot.total_cfu * (1 / math.pow(10, process))
             CFUsPerPound = reduced / lot.lot_size
@@ -215,33 +219,47 @@ class Session:
             positive = wMath.random_test(chanceOfPositive)
 
             if (positive):
-                lots = list_splice(lots, i, 1)
+                lots = list_splice(lots, c, 1)
                 finishedCaught += 1
-                i -= 1
+                c -= 1
+            c += 1 
     
         #  // STEP 5 Out Break Probability Calculation
 
         outbreakChances = []
 
         for i in range(0, len(lots)):
+            # this line
             outbreakChances.append(wCalc.get_possibility_of_outbreak(lots[i], wConst.OUTBREAKREQUIREMENTS["Sick"], wConst.OUTBREAKREQUIREMENTS["Susceptible"], wConst.OUTBREAKREQUIREMENTS["Dose"], wConst.PROCESS[self.selections["Process_Selection"]]["Reduction"]))
-
+            #print(wCalc.get_possibility_of_outbreak(lots[i], wConst.OUTBREAKREQUIREMENTS["Sick"], wConst.OUTBREAKREQUIREMENTS["Susceptible"], wConst.OUTBREAKREQUIREMENTS["Dose"], wConst.PROCESS[self.selections["Process_Selection"]]["Reduction"]))
         #  // STEP 6 Outbreak random probability test
-        outbreaks = 0
 
-        for i in range(len(lots)):
-            if(wMath.random_test(outbreakChances[i])):
+        outbreaks = 0
+        c = 0
+        while(c < len(lots)):
+            #print(outbreakChances[c])
+            if(wMath.random_test(outbreakChances[c])):
                 outbreaks += 1
-                lots = list_splice(lots, i, 1)
-                outbreakChances = list_splice(outbreakChances, i, 1)
-                i -= 1
+                lots = list_splice(lots, c, 1)
+                outbreakChances = list_splice(outbreakChances, c, 1)
+                c -= 1
+            c += 1
 
         outbreak_cost = 0
 
         for i in range(1, outbreaks + 1):
+            print("outbreaks" + str(outbreaks))
+            #print("multiplier" + str(self.statistics["outbreak_multiplier"]))
+            #print("outbreak cost: " + str(outbreak_cost))
+
             outbreak_cost += 10000 * self.statistics["outbreak_multiplier"]
-            self.statistics["outbreak_multiplier"] *= 2
+            # Updated because 2^n is to great so max is set to 33 being 17 trillion
+            if i < 33:
+                self.statistics["outbreak_multiplier"] *= 2
         
+        # print("lots:" + str(len(lots)))
+        # print("outbreak Cost" + str(outbreak_cost))
+        # print("Price" + str(price))
         self.balance += (wConst.PRICES["SuccessfulLot"] * len(lots)) - outbreak_cost - price
 
         self.statistics["cycles"] += float(amount)

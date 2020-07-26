@@ -62,6 +62,8 @@ class Lot:
         self.clusters = []
         self.ID = 0
 
+        self.initialize()
+
         
 
     def initialize(self):
