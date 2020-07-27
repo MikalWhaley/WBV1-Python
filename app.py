@@ -7,4 +7,4 @@ import Debug as wDebug
 # finishedIn = input()
 # variableIn = input()
 
-wDebug.simulate("ASW", "CSP1F", 10, 10, "Process")
+wDebug.simulate("ASW", "CSP1F", 10, 10, "rawTests")

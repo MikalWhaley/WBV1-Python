@@ -10,7 +10,7 @@ import Debug as wDebug
 
 
 
-# print(wMath.poisson(1,10,True))
+print(wMath.poisson(3,5,True))
 
 
 

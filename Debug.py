@@ -28,7 +28,7 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
 
     if(variable == "Process"):
         for key in wConst.PROCESS:
-            s.selections["Process_Selection "] = key
+            s.selections["Process_Selection"] = key
             data = s.cycle(cycles)
 
             #result = json.loads(data)
@@ -55,5 +55,5 @@ def simulate(GAP, Process, rawTests, finishedTests, variable):
             data["key"] = i
 
             matrix.append(data)
-    print(matrix)
+    print(json.dumps(matrix, indent=2))
     return matrix

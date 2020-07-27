@@ -17,8 +17,8 @@ def gaussianRand():
 
         while True:
             #do code
-            x1 = (2.0 * random.uniform(0, 1)) - 1
-            x2 = (2.0 * random.uniform(0, 1)) - 1
+            x1 = (2.0 * random.uniform(0, 1)) - 1.0
+            x2 = (2.0 * random.uniform(0, 1)) - 1.0
             w = (x1* x1) + (x2 * x2)
             if(w >= 1.0):
                 break
@@ -104,7 +104,7 @@ class Lot:
     def compound_large_clusters(self):
         RNG = math.floor(random.uniform(0, 1) * 10000 ) + 1
 
-        if (RNG <= 10000 * probability_of_medium_cluster):
+        if (RNG <= 10000 * probability_of_large_cluster):
             c = Cluster(5000)
             self.clusters.append(c)
             self.total_cfu += c.CFUs

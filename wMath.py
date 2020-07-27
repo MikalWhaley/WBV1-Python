@@ -23,7 +23,8 @@ def random_test(probability):
     precision = 100000
     threshold = precision * probability
     rn = random.uniform(0, 1) * precision
-
+    # print("prec" + str(precision))
+    # print("rn: " + str(rn))
     return (threshold > rn)
 
 
